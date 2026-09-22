@@ -16,7 +16,10 @@ def train_models():
     metric_rows, matrices, fitted_models = [], {}, {}
     for name, model in build_models().items():
         # TODO(FILL-08): 只用训练集拟合，再在测试集上调用 evaluate_model。
-        raise NotImplementedError("请完成当前教学填空")
+        model.fit(x_train, y_train)
+        metrics, matrix, errors, predictions = evaluate_model(
+            model, x_test, y_test
+        )
         metric_rows.append({"model": name, **metrics})
         matrices[name] = matrix
         fitted_models[name] = model
@@ -29,8 +32,9 @@ def train_models():
             OUTPUT_DIR / f"{name}_predictions.csv", encoding="utf-8-sig"
         )
 
-    # TODO(FILL-09): 按 f1 从高到低整理指标表。
-    metrics_frame = None
+    metrics_frame = pd.DataFrame(metric_rows).sort_values(
+        "f1", ascending=False
+    )
     if metrics_frame is None:
         raise NotImplementedError("请完成当前教学填空")
     metrics_frame.to_csv(OUTPUT_DIR / "metrics.csv", index=False, encoding="utf-8-sig")

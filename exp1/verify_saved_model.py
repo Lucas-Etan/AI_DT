@@ -10,7 +10,7 @@ from data_utils import load_dataset, make_split
 def main() -> None:
     _, x_test, _, y_test = make_split(load_dataset())
     # TODO(FILL-12): 从可信路径加载刚刚由本人训练的 Pipeline。
-    raise NotImplementedError("请完成当前教学填空")
+    model = joblib.load(MODEL_DIR / "best_pipeline.joblib")
     loaded_predictions = model.predict(x_test)
 
     # 最佳模型由 F1 排序得到；从 metrics.csv 恢复其名称。

@@ -19,10 +19,10 @@ def main() -> None:
     save_metric_plot(metrics_frame)
 
     # TODO(FILL-10): 从按 F1 排序后的首行取得最佳模型名称。
-    best_name = None
     model_path = MODEL_DIR / "best_pipeline.joblib"
     # TODO(FILL-11): 把最佳的完整 Pipeline 保存到 model_path。
-    raise NotImplementedError("请完成当前教学填空")
+    best_name = str(metrics_frame.iloc[0]["model"])
+    joblib.dump(fitted_models[best_name], model_path)
     elapsed = time.perf_counter() - started_at
     summary = {
         "best_model": best_name,

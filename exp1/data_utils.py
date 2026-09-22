@@ -14,8 +14,8 @@ def load_dataset() -> pd.DataFrame:
 
     # 原始类别 0 有 212 条、类别 1 有 357 条；反转后让较少类别成为正类 1。
     frame = frame.rename(columns={"target": TARGET_COLUMN})
-    # TODO(FILL-01): 将原始 0/1 互换，得到中性的 class_0/class_1 标签。
-    raise NotImplementedError("请完成当前教学填空")
+    frame[TARGET_COLUMN] = 1 - frame[TARGET_COLUMN]
+    # raise NotImplementedError("请完成当前教学填空")
     return frame
 
 
@@ -24,5 +24,11 @@ def make_split(frame: pd.DataFrame):
     features = frame.drop(columns=TARGET_COLUMN)
     target = frame[TARGET_COLUMN]
 
-    # TODO(FILL-02): 固定测试比例和种子，并按 target 分层划分。
+    return train_test_split(
+        features,
+        target,
+        test_size=0.20,
+        random_state=42,
+        stratify=target,
+    )
     raise NotImplementedError("请完成当前教学填空")
