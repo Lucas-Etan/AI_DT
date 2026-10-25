@@ -1,0 +1,5 @@
+# torch 使用单独的 CPU wheel 索引安装，见实验手册。
+transformers==5.15.1
+pydantic==2.13.4
+openai==3.3.1
+psutil==7.2.2
